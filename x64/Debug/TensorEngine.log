@@ -1,0 +1,20 @@
+﻿C:\Users\Ayush\source\repos\TensorEngine\TensorEngine\singlyLinkedList.cpp(24,69): : error : expected '(' or '{'
+     24 |         singlyLinkedList() : head(nullptr), tail(nullptr), ListBase -> firstNode(nullptr){}
+        |                                                                     ^
+C:\Users\Ayush\source\repos\TensorEngine\TensorEngine\singlyLinkedList.cpp(24,69): : error : expected member name or ';' after declaration specifiers
+C:\Users\Ayush\source\repos\TensorEngine\TensorEngine\singlyLinkedList.cpp(78,9): : error : unknown type name 'ListIterator'
+     78 |         ListIterator newIterator() { return ListIterator(head); }
+        |         ^
+C:\Users\Ayush\source\repos\TensorEngine\TensorEngine\singlyLinkedList.cpp(80,9): : error : unknown type name 'ListIterator'
+     80 |         ListIterator newIterator(const Type& data) {
+        |         ^
+C:\Users\Ayush\source\repos\TensorEngine\TensorEngine\singlyLinkedList.cpp(85,9): : error : unknown type name 'ListIterator'
+     85 |         ListIterator newIteratorBefore(const Type& data) {
+        |         ^
+C:\Users\Ayush\source\repos\TensorEngine\TensorEngine\singlyLinkedList.cpp(105,26): : error : unknown type name 'ListIterator'
+    105 |     public: int addAfter(ListIterator it, Type data) {
+        |                          ^
+C:\Users\Ayush\source\repos\TensorEngine\TensorEngine\singlyLinkedList.cpp(121,29): : error : unknown type name 'ListIterator'
+    121 |     public: int deleteAfter(ListIterator it) {
+        |                             ^
+  7 errors generated.

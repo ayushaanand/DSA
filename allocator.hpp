@@ -2,7 +2,6 @@
 
 #include <stack>
 #include <cstdlib>
-#include <iostream>
 
 template <typename Type>
 class segmentedArrayAllocator {

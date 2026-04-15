@@ -1,7 +1,7 @@
 #pragma once
 
 #include <utility>
-#include <new>
+#include <iostream>
 
 #include "allocator.hpp"
 
@@ -110,28 +110,12 @@ class singlyLinkedList {
             tail = newNode;
         }
 
-        void push_back(const Type& data){
-            emplace_back(data);
-        }
-
-        void push_back(Type&& data){
-            emplace_back(std::move(data));
-        }
-
         template <typename... Args>
         void emplace_front(Args&&... args){
             singleLinkNode *newNode = createNode(prevHead -> next, std::forward<Args>(args)...);
 
             prevHead -> next = newNode;
             if(prevHead == tail) [[unlikely]] tail = newNode;
-        }
-
-        void push_front(const Type& data){
-            emplace_front(data);
-        }
-
-        void push_front(Type&& data){
-            emplace_front(std::move(data));
         }
 
         template <typename... Args>
@@ -144,14 +128,6 @@ class singlyLinkedList {
             if(currNode == tail) tail = newNode;
         }
 
-        void add_after(Iterator& it, const Type& data){
-            emplace_after(it, data);
-        }
-
-        void add_after(Iterator& it, Type&& data){
-            emplace_after(it, std::move(data));
-        }
-
         template <typename... Args>
         void emplace_before(Iterator& it, bool pointToNew, Args&&... args){
             if(it.isNull()) return;
@@ -159,14 +135,6 @@ class singlyLinkedList {
 
             (it.prevNode) -> next = newNode;
             if(!pointToNew) ++it;
-        }
-
-        void add_before(Iterator& it, bool pointToNew, const Type& data){
-            emplace_before(it, pointToNew, data);
-        }
-
-        void add_before(Iterator& it, bool pointToNew, Type&& data){
-            emplace_before(it, pointToNew, std::move(data));
         }
 
         // given iterator then uses next node 

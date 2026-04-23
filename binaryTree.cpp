@@ -4,6 +4,9 @@
 #include <functional>
 #include <utility>
 #include <iostream>
+#include <vector>
+#include <string>
+#include <format>
 
 struct stdBST {
     struct MetaData {};
@@ -123,11 +126,13 @@ struct avlBST {
     template <typename Node>
     static inline void rebalance(Node **node){
         __update_height(*node);
-        if(balance(*node) <= 1 && balance(*node) >= -1) return;
+        int b = balance(*node);
+        if(b <= 1 && b >= -1) return;
 
         bool imbalance[2];
-        imbalance[0] = balance(*node) < 0;
-        imbalance[1] = (balance((*node) -> ptr_arr[imbalance[0]]) == 0) ? imbalance[0] : balance((*node) -> ptr_arr[imbalance[0]]) < 0;
+        imbalance[0] = b < 0;
+        b = balance((*node) -> ptr_arr[imbalance[0]]);
+        imbalance[1] = (b == 0) ? imbalance[0] : (b < 0);
 
         if(imbalance[0] == imbalance[1]){
             Node *curr = *node;
@@ -328,6 +333,43 @@ class binaryTree {
             };
 
             print(print, root, 0);
+            os << std::endl;
+        }
+        
+        void printTree_vert(std::ostream& os = std::cout){
+            std::vector<std::string> Mat;
+
+            auto safePut = [&Mat](const Type& data, int row, int col){
+                if(Mat.size() < row + 1) Mat.resize(row + 1);
+                if(Mat[row].size() < col){
+                    int diff = col - Mat[row].size();
+                    for(int i = 0;i < diff;++i) Mat[row] += " ";
+                }
+                Mat[row] += std::format("{}", data);
+            };
+            
+            auto safePutC = [&Mat](const char c, int row, int col){
+                if(Mat.size() < row + 1) Mat.resize(row + 1);
+                if(Mat[row].size() < col){
+                    int diff = col - Mat[row].size();
+                    for(int i = 0;i < diff;++i) Mat[row] += " ";
+                }
+                Mat[row] += std::format("{}", c);
+            };
+
+            auto print = [&Mat, safePut, safePutC](auto& self, Node *node, int row, int col) -> int {
+                if(node == NULL){
+                    safePutC('x', row, col);
+                    return col + 1;
+                }
+
+                int ret = self(self, node -> left, row + 1, col);
+                safePut(node -> data, row, ret);
+                return self(self, node -> right, row + 1, Mat[row].size());
+            };
+
+            print(print, root, 0, 0);
+            for(int i = 0;i < Mat.size();++i) os << Mat[i] << '\n';
             os << std::endl;
         }
 };

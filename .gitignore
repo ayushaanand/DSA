@@ -2,3 +2,5 @@
 !.gitignore
 !*.cpp
 !*.hpp
+TensorEngine.cpp
+benchmark.cpp
